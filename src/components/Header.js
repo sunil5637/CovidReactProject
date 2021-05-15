@@ -9,7 +9,7 @@ class Header extends Component {
         <header id="header" class="fixed-top">
           <div class="container d-flex align-items-center">
             <h1 class="logo me-auto">
-              <a asp-area="" asp-controller="Home" asp-action="Index">
+              <a href="#">
                 <span>Covid Ca</span>re Portal
               </a>
             </h1>
@@ -33,18 +33,10 @@ class Header extends Component {
                       </NavLink>
                     </li>
                     <li>
-                      <a asp-area="" asp-controller="Home" asp-action="Index">
-                        Plasma Donation
-                      </a>
+                      <a href="#">Plasma Donation</a>
                     </li>
                     <li>
-                      <a
-                        asp-area=""
-                        asp-controller="Quarantine"
-                        asp-action="Quarantine"
-                      >
-                        Quarantine Centre
-                      </a>
+                      <a href="#">Quarantine Centre</a>
                     </li>
                   </ul>
                 </li>
@@ -54,9 +46,7 @@ class Header extends Component {
                   </a>
                   <ul>
                     <li>
-                      <a asp-area="" asp-controller="Home" asp-action="About">
-                        About Us
-                      </a>
+                      <NavLink to="/aboutus">About Us</NavLink>
                     </li>
                     <li>
                       <a asp-area="" asp-controller="Home" asp-action="Index">
@@ -86,24 +76,16 @@ class Header extends Component {
                 </li>
 
                 <li>
-                  <a asp-area="" asp-controller="Home" asp-action="Symptom">
-                    Symptoms Check
-                  </a>
+                  <NavLink to="/symptoms">Symptoms Check</NavLink>
                 </li>
                 <li>
-                  <a asp-area="" asp-controller="Home" asp-action="Advisory">
-                    Advisory
-                  </a>
+                  <NavLink to="/advisory">Advisory</NavLink>
                 </li>
                 <li>
-                  <a asp-area="" asp-controller="Home" asp-action="FAQ">
-                    FAQ
-                  </a>
+                  <NavLink to="/faq">FAQ</NavLink>
                 </li>
                 <li>
-                  <a asp-area="" asp-controller="Contact" asp-action="Contact">
-                    Contact Us
-                  </a>
+                  <NavLink to="/contactus">Contact Us</NavLink>
                 </li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle"></i>
