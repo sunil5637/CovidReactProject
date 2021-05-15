@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
+import React from "react";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Registration from "./Registration";
 import Home from "./Home";
+import VaccineReg from "./components/VaccineReg";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route exact path="/" component={Home} />
         </switch>
         <Switch>
-          <Route path="/Registration" component={Registration} />
+          <Route path="/VaccineReg" component={VaccineReg} />
         </Switch>
       </Router>
       <br />

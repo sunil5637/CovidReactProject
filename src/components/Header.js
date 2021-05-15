@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import "./style.css";
+import "../style.css";
 
 class Header extends Component {
   render() {
@@ -22,18 +22,15 @@ class Header extends Component {
                   </NavLink>
                 </li>
                 <li class="dropdown">
-                  <NavLink to="/Registration" activeClassName="selected">
-                    <span>Registration</span> <i class="bi bi-chevron-down"></i>
+                  <NavLink to="/" activeClassName="selected">
+                    <span> Registration</span>{" "}
+                    <i class="bi bi-chevron-down"></i>
                   </NavLink>
                   <ul>
                     <li>
-                      <a
-                        asp-area=""
-                        asp-controller="Registrations"
-                        asp-action="Create"
-                      >
+                      <NavLink to="/VaccineReg" activeClassName="selected">
                         Vaccination
-                      </a>
+                      </NavLink>
                     </li>
                     <li>
                       <a asp-area="" asp-controller="Home" asp-action="Index">

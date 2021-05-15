@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./style.css";
+import "../style.css";
 import Carousel from "react-bootstrap/Carousel";
 
-import A from "./assets/C1.jpg";
-import B from "./assets/C3.jpg";
-import C from "./assets/C5.jpg";
+import A from "../assets/C1.jpg";
+import B from "../assets/C3.jpg";
+import C from "../assets/C5.jpg";
 
 class HomeContent extends Component {
   render() {
