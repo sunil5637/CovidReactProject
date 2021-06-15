@@ -9,11 +9,11 @@ class VaccineReg extends Component {
         <br />
         <br />
         <br />
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <h3>Vaccine Registration</h3>
         </div>
         <hr />
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <VaccineForm />
         </div>
       </>

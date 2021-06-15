@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class VaccineForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       errmsg: "",
-      fullname: "",
+      name: "",
       age: null,
       gender: "",
       address: "",
@@ -22,7 +23,7 @@ class VaccineForm extends Component {
   handleValidate = () => {
     let msg = "";
     if (
-      this.state.fullname === "" ||
+      this.state.name === "" ||
       this.state.age === null ||
       this.state.address === "" ||
       this.state.phone === "" ||
@@ -40,10 +41,10 @@ class VaccineForm extends Component {
     return (
       <>
         {this.state.gender}
-        <form>
+        <form onSubmit={this.submitHandler}>
           <input
             type="text"
-            name="fullname"
+            name="name"
             className="form-control"
             placeholder="Full Name"
             style={{ width: 400 }}
@@ -78,7 +79,7 @@ class VaccineForm extends Component {
           <br />
           <br />
           <input
-            type="text"
+            type="number"
             name="phone"
             className="form-control"
             onChange={this.handleChange}
@@ -105,12 +106,9 @@ class VaccineForm extends Component {
           />
           <div>{this.state.errmsg}</div>
           <br />
-          <input
-            type="button"
-            className="btn btn-primary"
-            value="Submit"
-            onClick={this.handleValidate}
-          />
+          <button className="btn btn-primary" type="submit">
+            Submit
+          </button>
         </form>
       </>
     );
