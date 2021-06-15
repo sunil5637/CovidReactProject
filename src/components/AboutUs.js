@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-
-import img1 from "../assets/img1.jpg";
 import "../style.css";
 
 class AboutUs extends Component {

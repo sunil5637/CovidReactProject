@@ -16,9 +16,9 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <switch>
+        <Switch>
           <Route exact path="/" component={Home} />
-        </switch>
+        </Switch>
         <Switch>
           <Route path="/VaccineReg" component={VaccineReg} />
         </Switch>
