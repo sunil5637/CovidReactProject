@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 class VaccineData extends Component {
   constructor(props) {
@@ -14,8 +15,11 @@ class VaccineData extends Component {
       "https://localhost:44359/api/Vaccinations/"
     );
     this.setState({ items: response.data });
-    console.log(this.state.items);
   }
+
+  handleDelete = (id) => {
+    console.log(id);
+  };
 
   render() {
     const list = [];
@@ -60,6 +64,24 @@ class VaccineData extends Component {
             </tr>
             {list}
           </table>
+        </div>
+        <div
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <NavLink to="/DeleteVaccinationRecord">Delete Record</NavLink>
+        </div>
+        <div
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <NavLink to="/UpdateVaccinationRecord">Update Record</NavLink>
         </div>
       </>
     );

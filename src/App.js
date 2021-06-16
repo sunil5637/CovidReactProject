@@ -11,6 +11,8 @@ import Contact from "./components/Contact";
 import Faq from "./components/Faq";
 import Symptoms from "./components/Symptoms";
 import VaccineData from "./components/VaccineData";
+import DeleteVaccine from "./components/DeleteVaccine";
+import UpdateVaccine from "./components/UpdateVaccine";
 
 function App() {
   return (
@@ -40,6 +42,12 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/AllVaccineRecords" component={VaccineData} />
+        </Switch>
+        <Switch>
+          <Route path="/DeleteVaccinationRecord" component={DeleteVaccine} />
+        </Switch>
+        <Switch>
+          <Route path="/UpdateVaccinationRecord" component={UpdateVaccine} />
         </Switch>
       </Router>
       <br />
