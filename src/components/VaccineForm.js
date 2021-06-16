@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 class VaccineForm extends Component {
   constructor(props) {
@@ -39,11 +39,25 @@ class VaccineForm extends Component {
     console.log(this.state);
   };
 
+  handleSubmit = (e) => {
+    axios
+      .post("https://localhost:44359/api/Vaccinations/", {
+        fullname: this.state.name,
+        age: this.state.age,
+        gender: this.state.gender,
+        phone: this.state.phone,
+        address: this.state.address,
+        aadhar: this.state.aadhar,
+      })
+      .then((response) => console.log(response));
+  };
+
   render() {
     return (
       <>
         <div>
-          <form>
+          <NavLink to="/AllVaccineRecords">List all Records</NavLink>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               name="name"
@@ -88,6 +102,15 @@ class VaccineForm extends Component {
             <br />
             <input
               type="text"
+              name="phone"
+              className="form-control"
+              onChange={this.handleChange}
+              placeholder="Phone Number"
+              style={{ width: 400 }}
+            />
+            <br />
+            <input
+              type="text"
               name="address"
               className="form-control"
               onChange={this.handleChange}
@@ -105,11 +128,7 @@ class VaccineForm extends Component {
             />
             <div>{this.state.errmsg}</div>
             <br />
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={this.handleValidate}
-            >
+            <button className="btn btn-primary" type="submit">
               Submit
             </button>
           </form>

@@ -10,6 +10,7 @@ import Advisory from "./components/Advisory";
 import Contact from "./components/Contact";
 import Faq from "./components/Faq";
 import Symptoms from "./components/Symptoms";
+import VaccineData from "./components/VaccineData";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/contactus" component={Contact} />
+        </Switch>
+        <Switch>
+          <Route path="/AllVaccineRecords" component={VaccineData} />
         </Switch>
       </Router>
       <br />
