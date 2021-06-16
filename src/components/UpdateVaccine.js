@@ -21,20 +21,20 @@ class UpdateVaccine extends Component {
     this.setState({ [name]: value });
   };
 
-  handleUpdate = (event) => {
+  handleUpdate = async (event) => {
     console.log(this.state);
-    // axios
-    //   .put("https://localhost:44359/api/Vaccinations/" + this.state.id, {
-    //     fullname: this.state.fullname,
-    //     age: this.state.age,
-    //     gender: this.state.gender,
-    //     phone: this.state.phone,
-    //     address: this.state.address,
-    //     aadhar: this.state.aadhar,
-    //   })
-    //   .then((response) => console.log(response))
-    //   .catch((res) => console.log(res));
-    })
+    await axios.put(
+      "https://localhost:44359/api/Vaccinations/" + this.state.id,
+      {
+        id: this.state.id,
+        fullname: this.state.fullname,
+        age: this.state.age,
+        gender: this.state.gender,
+        phone: this.state.phone,
+        address: this.state.address,
+        aadhar: this.state.aadhar,
+      }
+    );
   };
 
   render() {
@@ -49,7 +49,7 @@ class UpdateVaccine extends Component {
             paddingLeft: 50,
           }}
         >
-          <form>
+          <form onSubmit={this.handleUpdate}>
             <input
               type="number"
               name="id"
@@ -129,11 +129,7 @@ class UpdateVaccine extends Component {
             />
             <div>{this.state.errmsg}</div>
             <br />
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={this.handleUpdate}
-            >
+            <button className="btn btn-primary" type="submit">
               Update
             </button>
           </form>
