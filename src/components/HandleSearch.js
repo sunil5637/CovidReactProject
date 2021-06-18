@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class UpdateVaccine extends Component {
+class HandleSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,8 +12,18 @@ class UpdateVaccine extends Component {
       address: "",
       phone: "",
       aadhar: "",
-      errMsg: "",
+      msg: "",
+      obj: {},
+      msg: "",
+      status: null,
     };
+  }
+
+  async componentDidMount() {
+    const response = await axios.get(
+      "https://localhost:44359/api/Vaccinations/" + this.props.id
+    );
+    this.setState({ obj: response.data, gender: response.data.gender });
   }
 
   handleChange = (event) => {
@@ -21,11 +31,11 @@ class UpdateVaccine extends Component {
     this.setState({ [name]: value });
   };
 
-  handleUpdate = async (event) => {
+  handleSubmit = async () => {
     await axios.put(
-      "https://localhost:44359/api/Vaccinations/" + this.state.id,
+      "https://localhost:44359/api/Vaccinations/" + this.props.id,
       {
-        id: this.state.id,
+        id: this.props.id,
         fullname: this.state.fullname,
         age: this.state.age,
         gender: this.state.gender,
@@ -39,32 +49,22 @@ class UpdateVaccine extends Component {
   render() {
     return (
       <>
-        <br />
-        <br />
-        <br />
-        <br />
+        <div>{this.state.msg}</div>
         <div
           style={{
-            paddingLeft: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
           }}
         >
-          <form onSubmit={this.handleUpdate}>
-            <input
-              type="number"
-              name="id"
-              className="form-control"
-              placeholder="Id"
-              onChange={this.handleChange}
-              style={{ width: 300 }}
-            />
-            <br />
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               name="fullname"
               className="form-control"
-              placeholder="Full Name"
+              placeholder={this.state.obj.fullname}
+              style={{ width: 400 }}
               onChange={this.handleChange}
-              style={{ width: 300 }}
             />
             <br />
             <input
@@ -72,7 +72,7 @@ class UpdateVaccine extends Component {
               name="age"
               className="form-control"
               onChange={this.handleChange}
-              placeholder="Age"
+              placeholder={this.state.obj.age}
               style={{ width: 400 }}
             />
             <br />
@@ -105,7 +105,7 @@ class UpdateVaccine extends Component {
               name="phone"
               className="form-control"
               onChange={this.handleChange}
-              placeholder="Phone Number"
+              placeholder={this.state.obj.phone}
               style={{ width: 400 }}
             />
             <br />
@@ -114,7 +114,7 @@ class UpdateVaccine extends Component {
               name="address"
               className="form-control"
               onChange={this.handleChange}
-              placeholder="Address"
+              placeholder={this.state.obj.address}
               style={{ width: 400 }}
             />
             <br />
@@ -123,21 +123,18 @@ class UpdateVaccine extends Component {
               name="aadhar"
               className="form-control"
               onChange={this.handleChange}
-              placeholder="Aadhar no."
+              placeholder={this.state.obj.aadhar}
               style={{ width: 400 }}
             />
-            <div>{this.state.errmsg}</div>
             <br />
             <button className="btn btn-primary" type="submit">
-              Update
+              Submit
             </button>
           </form>
         </div>
-
-        <div>{this.state.errMsg}</div>
       </>
     );
   }
 }
 
-export default UpdateVaccine;
+export default HandleSearch;

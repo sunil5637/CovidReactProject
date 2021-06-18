@@ -12,7 +12,7 @@ import Faq from "./components/Faq";
 import Symptoms from "./components/Symptoms";
 import VaccineData from "./components/VaccineData";
 import DeleteVaccine from "./components/DeleteVaccine";
-import UpdateVaccine from "./components/UpdateVaccine";
+import UpdateSearchVaccine from "./components/UpdateSearchVaccine";
 
 function App() {
   return (
@@ -47,7 +47,10 @@ function App() {
           <Route path="/DeleteVaccinationRecord" component={DeleteVaccine} />
         </Switch>
         <Switch>
-          <Route path="/UpdateVaccinationRecord" component={UpdateVaccine} />
+          <Route
+            path="/UpdateVaccinationRecord"
+            component={UpdateSearchVaccine}
+          />
         </Switch>
       </Router>
       <br />

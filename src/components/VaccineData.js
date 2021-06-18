@@ -17,10 +17,6 @@ class VaccineData extends Component {
     this.setState({ items: response.data });
   }
 
-  handleDelete = (id) => {
-    console.log(id);
-  };
-
   render() {
     const list = [];
     this.state.items.forEach((element) => {

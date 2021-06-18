@@ -39,8 +39,8 @@ class VaccineForm extends Component {
     console.log(this.state);
   };
 
-  handleSubmit = (e) => {
-    axios
+  handleSubmit = async (e) => {
+    await axios
       .post("https://localhost:44359/api/Vaccinations/", {
         fullname: this.state.name,
         age: this.state.age,
