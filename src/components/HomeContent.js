@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "../style.css";
 import Carousel from "react-bootstrap/Carousel";
+import { NavLink } from "react-router-dom";
 
 import A from "../assets/C1.jpg";
 import B from "../assets/C3.jpg";
 import C from "../assets/C5.jpg";
+import RealTimeData from "./RealTimeData";
 
 class HomeContent extends Component {
   render() {
@@ -27,7 +29,6 @@ class HomeContent extends Component {
                   <p></p>
                 </div>
               </div>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={3000}>
@@ -39,8 +40,12 @@ class HomeContent extends Component {
             />
 
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Always Wear Mask when going outside</h3>
+              <div>
+                <button className="btn btn-success">
+                  <NavLink to="/advisory">Check Advisory</NavLink>
+                </button>
+              </div>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={3000}>
@@ -52,13 +57,18 @@ class HomeContent extends Component {
             />
 
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+              <h3>Get Vaccinated</h3>
+              <div>
+                <button className="btn btn-success">
+                  <NavLink to="/VaccineReg">Register for Vaccination</NavLink>
+                </button>
+              </div>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+        <div>
+          <RealTimeData />
+        </div>
       </>
     );
   }

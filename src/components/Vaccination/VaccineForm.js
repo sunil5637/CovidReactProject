@@ -1,29 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-class HandleSearch extends Component {
+class VaccineForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
-      fullname: "",
+      errmsg: "",
+      name: "",
       age: null,
       gender: "",
       address: "",
       phone: "",
       aadhar: "",
-      msg: "",
-      obj: {},
-      msg: "",
-      status: null,
     };
-  }
-
-  async componentDidMount() {
-    const response = await axios.get(
-      "https://localhost:44359/api/Vaccinations/" + this.props.id
-    );
-    this.setState({ obj: response.data, gender: response.data.gender });
   }
 
   handleChange = (event) => {
@@ -31,40 +21,63 @@ class HandleSearch extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = async () => {
-    await axios.put(
-      "https://localhost:44359/api/Vaccinations/" + this.props.id,
-      {
-        id: this.props.id,
-        fullname: this.state.fullname,
+  handleValidate = () => {
+    let msg = "";
+    if (
+      this.state.name === "" ||
+      this.state.age === null ||
+      this.state.address === "" ||
+      this.state.phone === "" ||
+      this.state.aadhar === ""
+    )
+      msg = (
+        <p style={{ color: "red", fontStyle: "italic" }}>
+          The above fields are mandatory.
+        </p>
+      );
+    this.setState({ errmsg: msg });
+    console.log(this.state);
+  };
+
+  handleSubmit = async (e) => {
+    await axios
+      .post("https://localhost:44359/api/Vaccinations/", {
+        fullname: this.state.name,
         age: this.state.age,
         gender: this.state.gender,
         phone: this.state.phone,
         address: this.state.address,
         aadhar: this.state.aadhar,
-      }
-    );
+      })
+      .then((response) => console.log(response));
   };
 
   render() {
     return (
       <>
-        <div>{this.state.msg}</div>
-        <div
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
+        <div>
+          <div>
+            <NavLink to="/AllVaccineRecords">
+              <button className="btn btn-success">List all Records</button>
+            </NavLink>{" "}
+            <NavLink to="/DeleteVaccinationRecord">
+              <button className="btn btn-success">Delete Records</button>
+            </NavLink>
+            <NavLink to="/UpdateVaccinationRecord">
+              {" "}
+              <button className="btn btn-success">Update Records</button>
+            </NavLink>
+          </div>
+          <br />
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
-              name="fullname"
+              name="name"
               className="form-control"
-              placeholder={this.state.obj.fullname}
+              placeholder="Full Name"
               style={{ width: 400 }}
               onChange={this.handleChange}
+              required
             />
             <br />
             <input
@@ -72,8 +85,9 @@ class HandleSearch extends Component {
               name="age"
               className="form-control"
               onChange={this.handleChange}
-              placeholder={this.state.obj.age}
+              placeholder="Age"
               style={{ width: 400 }}
+              required
             />
             <br />
             <label>
@@ -84,6 +98,7 @@ class HandleSearch extends Component {
                 name="gender"
                 checked={this.state.gender === "m"}
                 onChange={this.handleChange}
+                required
               />{" "}
               Male{" "}
             </label>
@@ -95,6 +110,7 @@ class HandleSearch extends Component {
                 name="gender"
                 checked={this.state.gender === "f"}
                 onChange={this.handleChange}
+                required
               />
               {"  "}
               Female
@@ -105,8 +121,11 @@ class HandleSearch extends Component {
               name="phone"
               className="form-control"
               onChange={this.handleChange}
-              placeholder={this.state.obj.phone}
+              placeholder="Phone Number"
               style={{ width: 400 }}
+              pattern="[0-9]{10}"
+              title="Please enter a valid phone number"
+              required
             />
             <br />
             <input
@@ -114,18 +133,21 @@ class HandleSearch extends Component {
               name="address"
               className="form-control"
               onChange={this.handleChange}
-              placeholder={this.state.obj.address}
+              placeholder="Address"
               style={{ width: 400 }}
+              required
             />
             <br />
             <input
-              type="text"
+              type="number"
               name="aadhar"
               className="form-control"
               onChange={this.handleChange}
-              placeholder={this.state.obj.aadhar}
+              placeholder="Aadhar no."
               style={{ width: 400 }}
+              required
             />
+            <div>{this.state.errmsg}</div>
             <br />
             <button className="btn btn-primary" type="submit">
               Submit
@@ -137,4 +159,4 @@ class HandleSearch extends Component {
   }
 }
 
-export default HandleSearch;
+export default VaccineForm;

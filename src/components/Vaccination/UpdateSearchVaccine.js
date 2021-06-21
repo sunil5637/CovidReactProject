@@ -26,11 +26,17 @@ class UpdateSearchVaccine extends Component {
   };
 
   getData = async () => {
-    const response = await axios.get(
-      "https://localhost:44359/api/Vaccinations/" + this.state.id
-    );
-    this.setState({ obj: response.data });
-    this.setState({ gender: response.data.gender, gotdata: true });
+    try {
+      const response = await axios.get(
+        "https://localhost:44359/api/Vaccinations/" + this.state.id
+      );
+
+      console.log(response.data);
+      this.setState({ obj: response.data });
+      this.setState({ gender: response.data.gender, gotdata: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleSubmit = async () => {
@@ -78,6 +84,7 @@ class UpdateSearchVaccine extends Component {
             className="form-control"
             style={{ width: 250 }}
             onChange={this.handleChange}
+            required
           />
           <input
             type="button"

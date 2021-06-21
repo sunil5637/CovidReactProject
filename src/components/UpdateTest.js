@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 
-class VaccineForm extends Component {
+class UpdateTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errmsg: "",
-      name: "",
+      id: null,
+      patientname: "",
       age: null,
       gender: "",
-      address: "",
       phone: "",
-      aadhar: "",
+      dateofTest:"",
+      errMsg: "",
     };
   }
 
@@ -21,50 +20,50 @@ class VaccineForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleValidate = () => {
-    let msg = "";
-    if (
-      this.state.name === "" ||
-      this.state.age === null ||
-      this.state.address === "" ||
-      this.state.phone === "" ||
-      this.state.aadhar === ""
-    )
-      msg = (
-        <p style={{ color: "red", fontStyle: "italic" }}>
-          The above fields are mandatory.
-        </p>
-      );
-    this.setState({ errmsg: msg });
+  handleUpdate = async (event) => {
     console.log(this.state);
-  };
-
-  handleSubmit = async (e) => {
-    await axios
-      .post("https://localhost:44359/api/Vaccinations/", {
-        fullname: this.state.name,
+    await axios.put(
+      "https://localhost:44359/api/BookTests/" + this.state.id,
+      {
+        id: this.state.id,
+        patientname: this.state.patientname,
         age: this.state.age,
         gender: this.state.gender,
         phone: this.state.phone,
-        address: this.state.address,
-        aadhar: this.state.aadhar,
-      })
-      .then((response) => console.log(response));
+        dateofTest: this.state.dateofTest,
+      }
+    );
   };
 
   render() {
     return (
       <>
-        <div>
-          <NavLink to="/AllVaccineRecords">List all Records</NavLink>
-          <form onSubmit={this.handleSubmit}>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div
+          style={{
+            paddingLeft: 50,
+          }}
+        >
+          <form onSubmit={this.handleUpdate}>
+            <input
+              type="number"
+              name="id"
+              className="form-control"
+              placeholder="Id"
+              onChange={this.handleChange}
+              style={{ width: 300 }}
+            />
+            <br />
             <input
               type="text"
-              name="name"
+              name="patientname"
               className="form-control"
-              placeholder="Full Name"
-              style={{ width: 400 }}
+              placeholder="Patient Name"
               onChange={this.handleChange}
+              style={{ width: 300 }}
             />
             <br />
             <input
@@ -110,32 +109,25 @@ class VaccineForm extends Component {
             />
             <br />
             <input
-              type="text"
-              name="address"
+              type="date"
+              name="dateofTest"
               className="form-control"
               onChange={this.handleChange}
-              placeholder="Address"
-              style={{ width: 400 }}
-            />
-            <br />
-            <input
-              type="text"
-              name="aadhar"
-              className="form-control"
-              onChange={this.handleChange}
-              placeholder="Aadhar no."
+              placeholder="Date of Testing"
               style={{ width: 400 }}
             />
             <div>{this.state.errmsg}</div>
             <br />
             <button className="btn btn-primary" type="submit">
-              Submit
+              Update
             </button>
           </form>
         </div>
+
+        <div>{this.state.errMsg}</div>
       </>
     );
   }
 }
 
-export default VaccineForm;
+export default UpdateTest;

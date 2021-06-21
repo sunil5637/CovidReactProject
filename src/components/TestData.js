@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
-class VaccineData extends Component {
+class TestData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,10 +12,14 @@ class VaccineData extends Component {
 
   async componentDidMount() {
     const response = await axios.get(
-      "https://localhost:44359/api/Vaccinations/"
+      "https://localhost:44359/api/BookTests/"
     );
     this.setState({ items: response.data });
   }
+
+  handleDelete = (id) => {
+    console.log(id);
+  };
 
   render() {
     const list = [];
@@ -23,12 +27,11 @@ class VaccineData extends Component {
       list.push(
         <tr>
           <td>{element.id}</td>
-          <td>{element.fullname}</td>
+          <td>{element.patientname}</td>
           <td>{element.age}</td>
           <td>{element.gender}</td>
           <td>{element.phone}</td>
-          <td>{element.address}</td>
-          <td>{element.aadhar}</td>
+          <td>{element.dateofTest}</td>
         </tr>
       );
     });
@@ -45,7 +48,7 @@ class VaccineData extends Component {
             display: "flex",
           }}
         >
-          <h3>All Vaccination Records</h3>
+          <h3>Entries For Covid Test</h3>
         </div>
         <div>
           <table class="table table-hover">
@@ -55,8 +58,7 @@ class VaccineData extends Component {
               <th>Age</th>
               <th>Gender</th>
               <th>Phone Number</th>
-              <th>Address</th>
-              <th>Aadhar No.</th>
+              <th>Date of Test</th>
             </tr>
             {list}
           </table>
@@ -68,7 +70,7 @@ class VaccineData extends Component {
             display: "flex",
           }}
         >
-          <NavLink to="/DeleteVaccinationRecord">Delete Record</NavLink>
+          <NavLink to="/DeleteTestEntry">Delete Record</NavLink>
         </div>
         <div
           style={{
@@ -77,11 +79,11 @@ class VaccineData extends Component {
             display: "flex",
           }}
         >
-          <NavLink to="/UpdateVaccinationRecord">Update Record</NavLink>
+          <NavLink to="/UpdateTestEntry">Update Record</NavLink>
         </div>
       </>
     );
   }
 }
 
-export default VaccineData;
+export default TestData;
